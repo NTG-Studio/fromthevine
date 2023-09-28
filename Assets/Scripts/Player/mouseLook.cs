@@ -38,10 +38,10 @@ public class mouseLook : MonoBehaviour
 
     private void updateInput()
     {
-        float invert = 1;
+        float invert = -1;
         if (gameManager.instance.gameSettings.invertY)
         {
-            invert = -1;
+            invert = 1;
         }
         Vector2 goal = new Vector2(Input.GetAxis("Mouse X"), Input.GetAxis("Mouse Y") * invert);
         input = gameManager.smoothLerp(input, goal, sharpness);
@@ -49,10 +49,10 @@ public class mouseLook : MonoBehaviour
 
     private void updateRot()
     {
-        rot = rot + input * lookSpeed;
+        rot +=  input * lookSpeed;
         rot.y = Mathf.Clamp(rot.y, rotClampX.x, rotClampX.y);
 
-        cam.rotation = Quaternion.Euler(rot.y, rot.x, 0);
-        body.localRotation = quaternion.Euler(0, rot.x, 0);
+        cam.localRotation = Quaternion.Euler(rot.y,0, 0);
+        body.rotation = Quaternion.Euler(0, rot.x, 0);
     }
 }

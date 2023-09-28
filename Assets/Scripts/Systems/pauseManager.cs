@@ -20,7 +20,8 @@ public class pauseManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        Cursor.lockState = CursorLockMode.Confined;
+        Cursor.visible = false;
     }
 
     // Update is called once per frame
@@ -45,11 +46,15 @@ public class pauseManager : MonoBehaviour
         gamePaused = true;
         toggleUI.ToggledOn = gameManager.instance.gameSettings.invertY;
         sliderUI.Value = gameManager.instance.gameSettings.volume;
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
         gameManager.instance.SpawnSound(pauseClip);
     }
 
     private void unpauseGame()
     {
+        Cursor.lockState = CursorLockMode.Confined;
+        Cursor.visible = false;
         gameManager.instance.SpawnSound(unpauseClip);
         gamePaused = false;
     }

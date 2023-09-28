@@ -22,8 +22,8 @@ public class motor : MonoBehaviour
         velocity += new Vector3(0, gravity * Time.deltaTime, 0);
 
         input = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
-        velocity += transform.forward * moveSpeed * input.y;
-        velocity += transform.right * moveSpeed * input.x;
+        velocity += transform.forward * moveSpeed * input.y * Time.deltaTime;
+        velocity += transform.right * moveSpeed * input.x * Time.deltaTime;
 
         controller.Move(velocity);
         velocity = gameManager.smoothLerp(velocity, Vector3.zero, 25);
